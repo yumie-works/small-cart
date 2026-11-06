@@ -7,6 +7,9 @@ const COUPONS = [
   { name: '送料無料クーポン', type: 'shipping', value: 0, min: 0, usable: false },
 ];
  
+// 検証用のダミーアカウント（このダミーサイトの中だけで使う）
+const DEMO_USERS = ['demo_pc_user', 'demo_sp_user'];
+const DEMO_PASS = 'sample-mart-demo';
 const yen = n => n.toLocaleString('ja-JP') + '円';
 function load() {
   try { return JSON.parse(localStorage.getItem('sm_state')) || {}; } catch (e) { return {}; }
@@ -44,6 +47,11 @@ const pages = {
     $('[data-testid="cart-list"]').hidden = false;
     const sel = $('[data-testid="quantity-select"]');
     const render = () => { $('[data-testid="cart-subtotal"]').textContent = yen(subtotal(load())); };
+    $('[data-testid="delete-all-items-button"]').addEventListener('click', () => {
+      const t = load(); t.qty = 0; t.coupon = null; save(t);
+      $('[data-testid="cart-list"]').hidden = true;
+      $('[data-testid="cart-empty"]').hidden = false;
+    });
     sel.value = String(s.qty);
     sel.addEventListener('change', () => { const t = load(); t.qty = Number(sel.value); t.coupon = null; save(t); render(); });
     $('[data-testid="cart-item-name"]').textContent = ITEM.name;
@@ -92,7 +100,33 @@ const pages = {
       s.coupon = checked ? Number(checked.dataset.index) - 1 : null;
       save(s); location.href = 'confirm.html';
     });
+    $('[data-testid="notes-on-shipping-charges"]').addEventListener('click', e => {
+      e.preventDefault(); $('[data-testid="shipping-notes-modal"]').hidden = false;
+    });
+    $('[data-testid="shipping-notes-close-button"]').addEventListener('click', () => {
+      $('[data-testid="shipping-notes-modal"]').hidden = true;
+    });
     $('[data-testid="cancel-button"]').addEventListener('click', () => { location.href = 'confirm.html'; });
+  },
+  login() {
+    $('[data-testid="login-button"]').addEventListener('click', () => {
+      const id = $('[data-testid="login-id-input"]').value.trim();
+      const pw = $('[data-testid="password-input"]').value;
+      if (DEMO_USERS.includes(id) && pw === DEMO_PASS) {
+        const s = load(); s.user = id; save(s);
+        later(400, () => { location.href = 'item.html'; });
+      } else {
+        $('[data-testid="login-error"]').hidden = false;
+      }
+    });
+  },
+  logout() { save({}); },
+  payment() {
+    $('[data-testid="next-button"]').addEventListener('click', () => {
+      const r = document.querySelector('[data-testid="payment-method-radio-button"]:checked');
+      const s = load(); s.payment = r ? r.value : null; save(s);
+      location.href = 'confirm.html';
+    });
   },
   complete() {
     $('[data-testid="order-number"]').textContent = 'SM-' + String(Date.now()).slice(-8);

@@ -5,3 +5,5 @@ button,.btn{display:inline-block;padding:8px 16px;margin:8px 8px 8px 0;border:1p
 .primary{background:#2d6a4f;color:#fff;border-color:#2d6a4f}
 .coupons{list-style:none;padding:0}.coupon-row{padding:10px;border:1px solid #ddd;border-radius:6px;margin:8px 0;background:#fff}.coupon-row.disabled{color:#999}
 .note{margin:4px 0 0 24px;font-size:13px;color:#b00}dl{display:grid;grid-template-columns:6em 1fr}.total{font-weight:700}.row{display:flex;gap:16px;align-items:center}
+.modal{border:1px solid #888;border-radius:8px;padding:12px;margin:8px 0;background:#fff}
+.user{margin-left:auto;font-size:12px}

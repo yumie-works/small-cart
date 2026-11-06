@@ -3,11 +3,12 @@
 <title>買い物かご | Sample Mart</title><link rel="stylesheet" href="style.css"><script src="app.js"></script></head>
 <body data-page="cart"><header class="bar"><span class="logo">Sample Mart</span><span class="demo">検証用ダミーサイト（架空）</span></header><main>
 <h1 data-testid="cart-title">買い物かご</h1>
+<button data-testid="delete-all-items-button">すべて削除</button>
 <p data-testid="cart-empty" hidden>買い物かごに商品がありません</p>
 <section data-testid="cart-list" hidden>
 <div class="row" data-testid="cart-row" data-index="1"><span data-testid="cart-item-name"></span>
 <label>数量 <select data-testid="quantity-select"><option>1</option><option>2</option><option>3</option></select></label></div>
 <p>小計 <strong data-testid="cart-subtotal"></strong></p>
-<a class="btn primary" href="confirm.html" data-testid="commit-order-button" data-index="1">ご購入手続き</a>
+<a class="btn primary" href="payment.html" data-testid="commit-order-button" data-index="1">ご購入手続き</a>
 </section>
 </main></body></html>
