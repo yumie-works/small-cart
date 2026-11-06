@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>注文内容の確認 | Sample Mart</title><link rel="stylesheet" href="style.css"><script src="app.js"></script></head>
+<body data-page="confirm"><header class="bar"><span class="logo">Sample Mart</span><span class="demo">検証用ダミーサイト（架空）</span></header><main>
+<h1 data-testid="confirm-order-title">注文内容の確認</h1>
+<p data-testid="loading">読み込み中…</p>
+<section data-testid="order-summary" hidden>
+<dl><dt>小計</dt><dd data-testid="confirm-subtotal"></dd>
+<dt>クーポン</dt><dd data-testid="coupon-discount"></dd>
+<dt>合計</dt><dd class="total" data-testid="total-price"></dd></dl>
+<p>クーポン：<span data-testid="coupon-usage-status"></span>
+<a href="coupon.html" data-testid="coupon-usage-update-button">変更する</a></p>
+<a class="btn primary" href="complete.html" data-testid="order-button">注文を確定する</a>
+</section>
+</main></body></html>
